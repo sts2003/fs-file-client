@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import Memo from "./components/Memo";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import Button from "@material-ui/core/Button";

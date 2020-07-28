@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   width: 500px;
@@ -26,8 +27,37 @@ class Memo extends React.Component {
         <Title>{this.props.title}</Title>
         <Content>{this.props.content}</Content>
         <RegDate>{this.props.regDate}</RegDate>
+        <button onClick={() => this._deleteHandler(this.props.refKey)}>
+          삭제
+        </button>
       </Container>
     );
   }
+
+  _deleteHandler = async (refKey) => {
+    const inputData = {
+      refKey,
+    };
+
+    await axios
+      .post(
+        "/api/deleteBtnHandler",
+        {
+          params: { inputData },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data === 1) {
+          alert("성공");
+        } else {
+          alert("실패");
+        }
+      });
+  };
 }
 export default Memo;
